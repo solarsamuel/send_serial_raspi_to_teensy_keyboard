@@ -1,9 +1,11 @@
- /* Teensy/Arduino Program */
+
+#include <Keyboard.h>
+/* Teensy/Arduino Program -GITHUB*/
 
 #define MODE_SERIAL  0
 #define MODE_COMMAND 1
 
-// Pin 13 has the LED on Teensy 3.0
+// Pin 13 has the LED on Teensy 3.0 -GITHUB
 int led = 13;
 int serialbaud;
 int32_t time=0;
@@ -12,7 +14,7 @@ int  pluscount, buffercount;
 char buffer[8];
 
 
-// the setup routine runs once when you press reset:
+// the setup routine runs once when you press reset: -GITHUB
 void setup() {               
  // initialize the digital pin as an output.
  pinMode(led, OUTPUT);
@@ -29,18 +31,18 @@ void setup() {
  mode = MODE_SERIAL;
 }
 
-// the loop routine runs over and over again forever:
+// the loop routine runs over and over again forever: -GITHUB
 void loop() {
- /* loop through 4 possible serverrequests */
+ /* loop through 4 possible serverrequests -GITHUB*/
 
- /* Scan data and commands from USB serial */
+ /* Scan data and commands from USB serial -GITHUB */
  while (Serial.available())
  {
    char c = Serial.read();
    Serial1.write(c);
  }
 
- /* Scan data and commands from hardware serial, ESP8266 module, using special scanner */
+ /* Scan data and commands from hardware serial, ESP8266 module, using special scanner -GITHUB*/
  while (Serial1.available())
  {
    char inch = Serial1.read();
@@ -48,7 +50,7 @@ void loop() {
    Serial.write(inch);   
  }
 
- /* Adapt hardware serrial baud to baudrate given for SUB serial adapter */
+ /* Adapt hardware serrial baud to baudrate given for SUB serial adapter -GITHUB*/
  if (serialbaud != Serial.baud())
  {
    serialbaud = Serial.baud();
@@ -58,6 +60,6 @@ void loop() {
  }
 
  /* Blink some status lights */
- if (Serial.dtr()) digitalWrite(led, (millis()/500)&1);   // 1 second blinks when USB serial is attaced, dtr is asserted
+ if (Serial.dtr()) digitalWrite(led, (millis()/500)&1);   // 1 second blinks when USB serial is attaced, dtr is asserted -GITHUB
  else digitalWrite(led, (millis()/2000)&1);               // 4 second slow blink when not dtr
 }
